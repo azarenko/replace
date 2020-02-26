@@ -1,0 +1,6 @@
+D:\projects\replace\replace\bin\Debug\replace.exe
+D:\projects\replace\replace\bin\Debug\replace.pdb
+D:\projects\replace\replace\obj\Debug\replace.csprojAssemblyReference.cache
+D:\projects\replace\replace\obj\Debug\replace.csproj.CoreCompileInputs.cache
+D:\projects\replace\replace\obj\Debug\replace.exe
+D:\projects\replace\replace\obj\Debug\replace.pdb

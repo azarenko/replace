@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartArguments>D:\Web\PnG\px-jolt\PG.GrowingFamilies.Version1.Environments\Azure-SIT1-C2-CD  ".%2a\.config%24" sit2</StartArguments>
+  </PropertyGroup>
+</Project>

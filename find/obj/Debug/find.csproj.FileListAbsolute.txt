@@ -1,0 +1,5 @@
+D:\projects\replace\find\bin\Debug\find.exe
+D:\projects\replace\find\bin\Debug\find.pdb
+D:\projects\replace\find\obj\Debug\find.csproj.CoreCompileInputs.cache
+D:\projects\replace\find\obj\Debug\find.exe
+D:\projects\replace\find\obj\Debug\find.pdb
