@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -19,14 +20,15 @@ namespace replace
             string fileFilter = args[1];
             string pattern = args[2];
             string formatter = args[3];
+            bool useRegex = Convert.ToBoolean(args[4]);
 
-            Regex re = new Regex(pattern, RegexOptions.Singleline | RegexOptions.IgnoreCase);
-
-            Replace(baseFolder, fileFilter, re, formatter);
+            Replace(baseFolder, fileFilter, pattern, formatter, useRegex);
         }
 
-        static void Replace(string baseFolder, string fileFilter, Regex re, string formatter)
+        static void Replace(string baseFolder, string fileFilter, string pattern, string formatter, bool useRegex)
         {
+            
+
             foreach (string filePath in Directory.GetFiles(baseFolder))
             {
                 if (!Regex.IsMatch(filePath, fileFilter))
@@ -42,12 +44,26 @@ namespace replace
                     sr.Read(buffer, 0, buffer.Length);
 
                     string data = utf8.GetString(buffer);
-                    if (re.IsMatch(data))
+
+                    if (useRegex)
                     {
-                        byte[] outbuffer = utf8.GetBytes(re.Replace(data, formatter));
-                        sw.Write(outbuffer, 0, outbuffer.Length);
-                        isMatch = true;
-                    }                    
+                        Regex re = new Regex(pattern, RegexOptions.Singleline | RegexOptions.IgnoreCase);
+                        if (re.IsMatch(data))
+                        {
+                            byte[] outbuffer = utf8.GetBytes(re.Replace(data, formatter));
+                            sw.Write(outbuffer, 0, outbuffer.Length);
+                            isMatch = true;
+                        }
+                    }
+                    else
+                    {
+                        if (data.Contains(pattern))
+                        {
+                            byte[] outbuffer = utf8.GetBytes(data.Replace(pattern, formatter));
+                            sw.Write(outbuffer, 0, outbuffer.Length);
+                            isMatch = true;
+                        }
+                    }
                 }
 
                 if (isMatch)
@@ -64,7 +80,7 @@ namespace replace
 
             foreach (string folderPath in Directory.GetDirectories(baseFolder))
             {
-                Replace(folderPath, fileFilter, re, formatter);
+                Replace(folderPath, fileFilter, pattern, formatter, useRegex);
             }
         }
     }
